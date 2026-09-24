@@ -5,50 +5,53 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <meta name="theme-color" content="#16a34a">
 <title>Calculadora de KM - 2 Linhas</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Calc KM">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,sans-serif;background:#f3f4f6;color:#0f172a}
-.topbar{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid #e5e7eb;padding:10px 14px;display:flex;align-items:center;justify-content:space-between}
-.topbar h1{font-size:15px;font-weight:800;letter-spacing:-.02em}
+.topbar{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid #e5e7eb;padding:8px 12px;display:flex;align-items:center;justify-content:space-between}
+.topbar h1{font-size:13px;font-weight:800;letter-spacing:-.02em}
 .topbar h1 span{color:#16a34a}
-.icon-btn{width:38px;height:38px;border-radius:999px;border:1px solid #e5e7eb;background:#fff;display:grid;place-items:center;font-size:18px;font-weight:700;cursor:pointer}
-.wrap{max-width:420px;margin:0 auto;padding:14px 12px 30px}
+.icon-btn{width:34px;height:34px;border-radius:999px;border:1px solid #e5e7eb;background:#fff;display:grid;place-items:center;font-size:16px;font-weight:700;cursor:pointer}
+.wrap{max-width:310px;margin:0 auto;padding:4px 4px 6px} /* mais fino meia tela */
 
-/* CARD ÚNICO OTIMIZADO - 2 LINHAS */
-.main-card{background:#fff;border:2.5px solid #16a34a;border-radius:18px;overflow:hidden;box-shadow:0 8px 24px rgba(22,163,74,.12)}
-.line1{padding:14px 12px 10px}
-.line1-labels{display:grid;grid-template-columns:1fr 1fr 52px;gap:8px;margin-bottom:4px}
-.line1-labels span{font-size:9px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:#64748b;text-align:center}
-.line1-inputs{display:grid;grid-template-columns:1fr 1fr 52px;gap:8px;align-items:center}
+/* CARD ÚNICO - ENXUTO LARGURA CELULAR */
+.main-card{background:#fff;border:2px solid #16a34a;border-radius:14px;overflow:hidden;box-shadow:0 4px 12px rgba(22,163,74,.10)}
+.line1{padding:6px 8px 6px}
+.line1-labels{display:grid;grid-template-columns:1fr 1fr 48px;gap:4px;margin-bottom:2px}
+.line1-labels span{font-size:7.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#64748b;text-align:center}
+.line1-inputs{display:grid;grid-template-columns:1fr 1fr 48px;gap:4px;align-items:center}
 .inp-wrap{position:relative;display:flex;align-items:center;gap:4px}
-.inp-wrap input{width:100%;padding:10px 6px;text-align:center;font-size:22px;font-weight:800;border:1.5px solid #e5e7eb;border-radius:12px;outline:none;background:#f8fafc;color:#0f172a}
+.inp-wrap input{width:100%;padding:7px 4px;text-align:center;font-size:18px;font-weight:800;border:1.5px solid #e5e7eb;border-radius:9px;outline:none;background:#f8fafc;color:#0f172a}
 .inp-wrap input:focus{border-color:#16a34a;background:#fff;box-shadow:0 0 0 3px rgba(22,163,74,.12)}
-.inp-wrap .prefix{position:absolute;left:6px;top:50%;transform:translateY(-50%);font-size:10px;font-weight:800;color:#64748b;background:#fff;border:1px solid #e5e7eb;padding:2px 4px;border-radius:6px}
-.inp-wrap.has-prefix input{padding-left:28px}
-.hand{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;font-size:24px;transition:.2s;border:2px solid transparent}
+.inp-wrap .prefix{position:absolute;left:4px;top:50%;transform:translateY(-50%);font-size:8px;font-weight:800;color:#64748b;background:#fff;border:1px solid #e5e7eb;padding:1px 3px;border-radius:5px}
+.inp-wrap.has-prefix input{padding-left:22px}
+.hand{width:48px;height:44px;border-radius:10px;display:grid;place-items:center;font-size:20px;transition:.2s;border:2px solid transparent}
 .hand.ok{background:#dcfce7;border-color:#16a34a;box-shadow:0 2px 8px rgba(22,163,74,.18)}
 .hand.bad{background:#fee2e2;border-color:#dc2626;box-shadow:0 2px 8px rgba(220,38,38,.15)}
-.hand span{font-size:10px;font-weight:800;letter-spacing:.04em;display:block;margin-top:1px}
+.hand span{font-size:9px;font-weight:800;letter-spacing:.04em;display:block;margin-top:1px}
 .hand.ok span{color:#16a34a}
 .hand.bad span{color:#dc2626}
 
 .chips{display:flex;gap:6px;justify-content:center;margin-top:10px}
 .chip{padding:7px 12px;border-radius:999px;border:1.5px solid #e5e7eb;background:#fff;font-size:11px;font-weight:800;color:#64748b;cursor:pointer}
 .chip.on{background:#0f172a;color:#fff;border-color:#0f172a}
-.hint{font-size:10px;color:#94a3b8;text-align:center;margin-top:6px;font-weight:600}
+.hint{display:none} /* linha 12,00km total removida */
 
 .divider{height:1px;background:#e5e7eb}
 .line2{display:grid;grid-template-columns:1fr 1fr 1fr;text-align:center}
-.line2 div{padding:11px 4px}
+.line2 div{padding:6px 2px}
 .line2 div+div{border-left:1px solid #e5e7eb}
-.line2 b{font-size:15px;font-weight:800;display:block}
-.line2 span{font-size:9px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#64748b;display:block;margin-top:1px}
-.line2 small{font-size:9px;color:#94a3b8;font-weight:600}
+.line2 b{font-size:13px;font-weight:800;display:block}
+.line2 span{font-size:8px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#64748b;display:block;margin-top:1px}
+.line2 small{display:none} /* removido lucro/km etc */
 .line2 .green{color:#16a34a}
 .line2 .red{color:#dc2626}
 
-.extra{padding:8px 10px;background:#f8fafc;border-top:1px solid #e5e7eb;display:flex;justify-content:space-around;font-size:10px;font-weight:700;color:#64748b;gap:6px;flex-wrap:wrap}
-.extra b{color:#0f172a}
+.extra{display:none} /* linha valor litro removida */
 
 .actions{display:flex;gap:8px;margin-top:12px}
 .btn{flex:1;padding:12px;border-radius:12px;border:none;font-weight:800;font-size:12px;cursor:pointer}
@@ -71,11 +74,18 @@ body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,sans-serif;backgr
 .hint2{font-size:10px;color:#64748b;text-align:center;margin-top:6px;line-height:1.4}
 .config-card{border:1.5px solid #16a34a;background:#f0fdf4;border-radius:12px;padding:10px;margin-top:10px}
 .config-card h3{font-size:11px;font-weight:800;color:#16a34a;text-transform:uppercase;letter-spacing:.06em;text-align:center;margin-bottom:8px}
+.auto-row{display:flex;gap:6px;margin-top:6px}
+.auto-btn{flex:1;padding:7px;border-radius:9px;border:1.5px solid #e5e7eb;background:#fff;font-size:11px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px}
+.auto-btn.voice{background:#16a34a;color:#fff;border-color:#16a34a;box-shadow:0 2px 8px rgba(22,163,74,.15);font-size:12px}
+.auto-btn:active{transform:scale(.98)}
+.status{font-size:10px;font-weight:700;text-align:center;margin-top:4px;display:none}
+.status.on{display:block}
 </style>
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
 </head>
 <body>
 <div class="topbar">
-  <h1>🚐 Calculadora <span>de KM</span></h1>
+  <h1>🚐 Calculadora <span>de KM</span> <span style="font-size:9px;background:#16a34a;color:#fff;padding:2px 6px;border-radius:999px;vertical-align:middle">AUTO</span></h1>
   <button class="icon-btn" id="btnMenu">⋮</button>
 </div>
 
@@ -100,30 +110,29 @@ body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,sans-serif;backgr
         <div class="hand ok" id="hand"><div style="text-align:center"><div id="handIcon" style="font-size:22px">👍</div><span id="handTxt">OK</span></div></div>
       </div>
       <div class="hint" id="hintKm">60,00 km total • 1h20min est.</div>
+      <div class="auto-row">
+        <button class="auto-btn voice" id="btnVoz" style="flex:1;padding:7px">🎤 FALAR</button>
+      </div>
+      <div class="status" id="ocrStatus"></div>
     </div>
 
     <div class="divider"></div>
 
-    <!-- LINHA 2: $/KM | $/HR | MARGEM -->
+    <!-- LINHA 2: $/KM | $/HR | MARGEM (sem subtítulos) -->
     <div class="line2">
       <div>
         <b id="vPkm" class="green">R$ 0,23</b>
         <span>$/KM</span>
-        <small id="vPkmSub">lucro/km</small>
       </div>
       <div>
         <b id="vPhr">R$ 10,35</b>
         <span>$/HR</span>
-        <small id="vPhrSub">lucro/hora</small>
       </div>
       <div>
         <b id="vNota">3,78 ★</b>
         <span>margem</span>
-        <small id="vNotaSub">26% lucro</small>
       </div>
     </div>
-
-    <div class="extra" id="extraInfo">⛽ R$ 37,20 • 🔧 R$ 21,00 • Custo R$ 58,20 • Sobra R$ -3,20</div>
   </div>
 
   <div style="text-align:center;margin-top:8px"><span style="font-size:10px;color:#94a3b8;font-weight:600">Toque em ⋮ para configurar seu mínimo e custos</span></div>
@@ -214,16 +223,16 @@ function calc(){
   const tStr = tempoMin<60 ? `${Math.round(tempoMin)}min` : `${Math.floor(tempoMin/60)}h ${String(Math.round(tempoMin%60)).padStart(2,'0')}min`;
   $('hintKm').textContent = `${fmt1(kmTotal)} km total • ${tStr} est.`;
 
-  // linha 2
+  // linha 2 (subtítulos removidos)
   $('vPkm').textContent=`R$ ${fmt(lucroKm)}`;
   $('vPkm').className = sobra>=0?'green':'red';
-  $('vPkmSub').textContent=sobra>=0?'lucro/km':'prejuízo/km';
+  if($('vPkmSub')) $('vPkmSub').textContent=sobra>=0?'lucro/km':'prejuízo/km';
   $('vPhr').textContent=`R$ ${fmt(lucroHr)}`;
-  $('vPhrSub').textContent=sobra>=0?'lucro/hora':'prejuízo/hora';
+  if($('vPhrSub')) $('vPhrSub').textContent=sobra>=0?'lucro/hora':'prejuízo/hora';
   $('vNota').textContent=`${nota.toFixed(2)} ★`;
-  $('vNotaSub').textContent=`${margem.toFixed(0)}% lucro`;
+  if($('vNotaSub')) $('vNotaSub').textContent=`${margem.toFixed(0)}% lucro`;
 
-  $('extraInfo').innerHTML=`⛽ R$ ${fmt(cComb)} • 🔧 R$ ${fmt(cVeic)} • Custo R$ ${fmt(custo)} • <b style="color:${sobra>=0?'#16a34a':'#dc2626'}">Sobra R$ ${fmt(sobra)}</b>`;
+  if($('extraInfo')) $('extraInfo').innerHTML=`⛽ R$ ${fmt(cComb)} • 🔧 R$ ${fmt(cVeic)} • Custo R$ ${fmt(custo)} • <b style="color:${sobra>=0?'#16a34a':'#dc2626'}">Sobra R$ ${fmt(sobra)}</b>`;
 
   localStorage.setItem('calcKm2Linhas',JSON.stringify({kmIda,valor,preco,cons,ckm,vel,minKm,minHr,fator}));
 }
@@ -237,6 +246,59 @@ $('overlay').addEventListener('click',closeDrawer);
 Object.values(els).forEach(e=>e.addEventListener('input',calc));
 $('btnReset').addEventListener('click',()=>{
   els.preco.value=6.20; els.cons.value=10; els.ckm.value=0.35; els.vel.value=45; els.minKm.value=0.50; els.minHr.value=30; calc();
+});
+
+// OCR removido (print removido a pedido)
+
+// --- AUTO: VOZ ---
+let recog=null;
+$('btnVoz').addEventListener('click',()=>{
+  const st=$('ocrStatus'); 
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SR){ st.className='status on'; st.style.color='#dc2626'; st.textContent='🎤 Voz não suportada neste navegador. Use Chrome.'; setTimeout(()=>st.className='status',3000); return; }
+  if(!recog){
+    recog=new SR(); recog.lang='pt-BR'; recog.continuous=false; recog.interimResults=false;
+    recog.onstart=()=>{ st.className='status on'; st.style.color='#16a34a'; st.textContent='🎤 Ouvindo... diga: "6 20 e 30"'; $('btnVoz').textContent='🔴 Ouvindo...'; };
+    recog.onend=()=>{ $('btnVoz').textContent='🎤 Falar'; };
+    recog.onresult=(ev)=>{
+      let txt=ev.results[0][0].transcript.toLowerCase();
+      // CORREÇÃO: "20 e 30" => "20,30" direto (sem precisar falar vírgula)
+      txt=txt.replace(/(\d+)\s+e\s+(\d{1,2})\b/g,'$1,$2').replace(/(\d+)\s+vírgula\s+(\d+)/g,'$1,$2').replace(/\s+e\s+/g,' ');
+      st.className='status on'; st.style.color='#16a34a'; st.textContent=`🗣️ "${txt}"`;
+      const numsRaw=[...txt.matchAll(/(\d+[.,]?\d*)/g)].map(m=>m[0]);
+      let nums=numsRaw.map(v=>parseFloat(v.replace(',','.')));
+      let km=null, val=null;
+      if(nums.length===2){
+        km=nums[0]; val=nums[1];
+      } else if(nums.length===1){
+        // 1 número sozinho = KM (corrige bug de KM ir pro Valor)
+        // Exceção: se tem vírgula "20 e 30" => valor, ou se falou "valor/real"
+        if(txt.includes(',') || txt.includes('valor') || txt.includes('real')){
+          val=nums[0];
+        } else {
+          km=nums[0];
+        }
+      } else if(nums.length===3){
+        // ex: [6, 20,30? já virou 20,30 então seria [6,20.30] -> cai em 2. Se for [6,20,30] sem vírgula, junta últimos
+        km=nums[0];
+        const dec=String(numsRaw[2]);
+        val=parseFloat(numsRaw[1].replace(',','.') + '.' + dec.padStart(2,'0').slice(-2));
+        if(isNaN(val)) val=nums[1]+nums[2]/100;
+      } else if(nums.length>2){
+        km=nums[0]; val=nums[nums.length-1];
+      }
+      // se txt tem "km" explícito, respeita
+      const mKm=txt.match(/(\d+[.,]?\d*)\s*(km|quil)/);
+      if(mKm) km=parseFloat(mKm[1].replace(',','.'));
+      if(km!==null) els.km.value=km;
+      if(val!==null) els.valor.value=val.toFixed(2);
+      if(km!==null||val!==null){ calc(); st.textContent=`✅ KM ${km??'?'} • R$ ${val!==null?val.toFixed(2).replace('.',','): '?'}`; try{ navigator.vibrate&&navigator.vibrate(80);}catch{} }
+      else { st.textContent=`⚠️ Não entendi. Tente "6 20 e 30"`; st.style.color='#dc2626'; }
+      setTimeout(()=>st.className='status',3500);
+    };
+    recog.onerror=()=>{ st.className='status on'; st.style.color='#dc2626'; st.textContent='❌ Erro microfone'; $('btnVoz').textContent='🎤 Falar'; };
+  }
+  try{ recog.start(); }catch{}
 });
 try{
   const s=JSON.parse(localStorage.getItem('calcKm2Linhas')||localStorage.getItem('calcKmUber')||'null');
@@ -252,6 +314,7 @@ try{
   }
 }catch{}
 calc();
+if('serviceWorker' in navigator){ navigator.serviceWorker.register('./sw.js'); }
 </script>
 </body>
 </html>
